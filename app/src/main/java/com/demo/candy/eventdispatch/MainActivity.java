@@ -5,11 +5,19 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String TAG="ouyangdi";
+
+    private Button mBtnTest, mBtnTest2;
+    private RelativeLayout mLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +34,48 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        mLayout = (RelativeLayout)findViewById(R.id.layout_parent);
+        mBtnTest2 = (Button)findViewById(R.id.btn_test2);
+
+        mLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.i(TAG, "viewgroup onTouch executed, action:"+ event.getAction());
+                return false;
+            }
+        });
+
+/*        mLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "you clicked layout");
+            }
+        });*/
+
+        mBtnTest = (Button)findViewById(R.id.btn_test);
+        mBtnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "you clicked button1");
+            }
+        });
+
+        mBtnTest2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "you clicked button2");
+            }
+        });
+
+/*        mBtnTest.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.i(TAG, "onClick execute, action:" + event.getAction());
+                //返回true,onTouchEvent(TouchEvent event)方法不执行,被该方法调用的OnClick(View v)方法也不执行
+                return true;
+            }
+        });*/
     }
 
     @Override
